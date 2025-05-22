@@ -1,39 +1,27 @@
 import streamlit as st
-import pandas as pd
-import streamlit as st
+import streamlit_shadcn_ui as ui
 
-with st.echo():
-    import pandas as pd
-    import streamlit as st
-    st.title("Getting Started Streamlit")
-    st.write("testing streamlit")
+trigger_btn = ui.button(text="Trigger Button", key="trigger_btn")
 
-    st.markdown("## Code")
+ui.alert_dialog(show=trigger_btn, title="Alert Dialog", description="This is an alert dialog", confirm_label="OK", cancel_label="Cancel", key="alert_dialog1")
 
-    cols1, cols2, cols3, cols4 = st.columns(4)
-
-    with cols1:
-        code = """
-        print("hello world")
-        """
-        code_button = st.button("show code")
-
-        if code_button:
-            st.code(code, language="python")
-
-    with cols2:
-        text_inp = st.text_input("Input your age")
-        word_tokenize = "|".join(text_inp.split())
-        st.markdown(f"{word_tokenize}")
-
-    with cols1:
-        text = st.text_input("Input your text")
-        st.markdown(f"{text}")
-
-    df = pd.DataFrame({"first column": [1, 2, 3, 4], "second column": [10, 5, 30, 40]})
-    with cols2:
-        st.dataframe(df)
-
-    chart_button = st.button("show chart")
-    if chart_button:
-        st.line_chart(df, x="first column", y="second column")
+# st.title("Proficiency Voice Recognition")
+#
+# @st.dialog("Cast your vote")
+# def vote(item):
+#     st.write(f"Why is {item} your favorite?")
+#     reason = st.text_input("Because...")
+#     if st.button("Submit"):
+#         st.session_state.vote = {"item": item, "reason": reason}
+#         st.rerun()
+#
+# if "vote" not in st.session_state:
+#     st.write("Vote for your favorite")
+#     if st.button("A"):
+#         vote("A")
+#     if st.button("B"):
+#         vote("B")
+# else:
+#     f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
+#
+#
