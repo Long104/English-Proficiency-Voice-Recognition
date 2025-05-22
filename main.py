@@ -1,7 +1,8 @@
-import pandas as pd
 import streamlit as st
 
 with st.echo():
+    import pandas as pd
+    import streamlit as st
     st.title("Getting Started Streamlit")
     st.write("testing streamlit")
 
