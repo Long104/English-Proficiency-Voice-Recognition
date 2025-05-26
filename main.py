@@ -43,7 +43,9 @@ if audio_value:
     transcription = client.automatic_speech_recognition("temp_audio.wav", model="openai/whisper-large-v3")
     
     st.write("Transcription:")
-    st.write(transcription)
+    st.write(transcription.text)
+    st.write("language:")
+    st.write(transcription.inferred_languages[0])
 
 # @st.dialog("Cast your vote")
 # def vote(item):
