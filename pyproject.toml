@@ -6,7 +6,9 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "altair>=5.5.0",
+    "huggingface-hub>=0.31.4",
     "pandas>=2.2.3",
+    "python-dotenv>=1.1.0",
     "streamlit>=1.45.1",
     "streamlit-shadcn-ui>=0.1.18",
 ]
