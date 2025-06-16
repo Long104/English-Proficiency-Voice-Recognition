@@ -1,67 +1,60 @@
-import streamlit as st
-import streamlit_shadcn_ui as ui
-from dotenv import load_dotenv
 import os
+
+import requests
+import streamlit as st
+
+# import streamlit_shadcn_ui as ui
+from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 
-import datetime
-
-now = datetime.datetime.now()
-
-# Format the date and time
-formatted_date_time = now.strftime('%Y/%m/%d %H:%M:%S')  
-
-print(formatted_date_time) 
-
-
-
 load_dotenv()
-
 token = os.getenv("HUGGINGFACE_TOKEN")
+API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
+headers = {
+    "Authorization": f"Bearer {os.getenv('HUGGINGFACE_TOKEN')}",
+    "Content-Type": "audio/flac",
+}
 
 
 st.title("Proficiency Voice Recognition")
 
 # receive voice
 audio_value = st.audio_input("Record a voice message")
-# if audio_value:
-#     st.audio(audio_value)
 
-
+transcription = ""
 
 # Save the audio bytes to a temporary file
 if audio_value:
     with open("temp_audio.wav", "wb") as f:
         f.write(audio_value.getvalue())
 
-    client = InferenceClient(
-        provider="fal-ai",
-        api_key=os.getenv("HUGGINGFACE_TOKEN"),
-    )
+    with open("temp_audio.wav", "rb") as audio_file:
+        audio_data = audio_file.read()
+
+    try:
+        # Send the request
+        response = requests.post(API_URL, headers=headers, data=audio_data)
+        response.raise_for_status()  # Raise exception for non-200 status
+
+        # Parse the response
+        result = response.json()
+
+        # Extract both text and language
+        transcription = result.get("text", "").strip()
+        language = result.get("language", "unknown")
+
+        # print(f"Detected language: {language}")
+        # print(f"Transcription: {transcription}")
+
+    except requests.exceptions.HTTPError as err:
+        print(f"HTTP Error: {err.response.status_code}")
+        print(f"Details: {err.response.text}")
+    except Exception as e:
+        print(f"Error: {str(e)}")
 
     # ai
-    transcription = client.automatic_speech_recognition("temp_audio.wav", model="openai/whisper-large-v3")
-    
-    st.write("Transcription:")
-    st.write(transcription.text)
-    st.write("language:")
-    st.write(transcription.inferred_languages[0])
 
-# @st.dialog("Cast your vote")
-# def vote(item):
-#     st.write(f"Why is {item} your favorite?")
-#     reason = st.text_input("Because...")
-#     if st.button("Submit"):
-#         st.session_state.vote = {"item": item, "reason": reason}
-#         st.rerun()
-#
-# if "vote" not in st.session_state:
-#     st.write("Vote for your favorite")
-#     if st.button("Voice recognize"):
-#         vote("A")
-#     if st.button("B"):
-#         vote("B")
-# else:
-#     f"You voted for {st.session_state.vote['item']} because {st.session_state.vote['reason']}"
-#
-#
+st.write("Transcription:")
+st.write(transcription)
+# st.write("language:")
+# st.write(transcription.inferred_languages[0])
