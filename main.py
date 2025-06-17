@@ -49,20 +49,26 @@ if audio_value:
         st.write(transcription)
         # st.write(result)
 
-        language_map = {
-            "สวัสดี": "Thai",
-            "Hello.": "English",
-            "Hola.": "Spanish",
-            "Bonjour.": "French",
-            "你好": "Chinese",
-            "مرحبا": "Arabic",
-            "こんにちは": "Japanese",
-            "привет": "Russian",
-        }
-
-        print(language_map.get(transcription, "Unknown language"))
         st.write("Language:")
-        st.write(language_map.get(transcription, "Unknown language"))
+
+        if transcription == "สวัสดี":
+            st.write("Thai")
+        elif transcription == "Hello.":
+            st.write("English")
+        elif transcription == "Hola.":
+            st.write("Spanish")
+        elif transcription == "Bonjour.":
+            st.write("French")
+        elif transcription == "你好":
+            st.write("Chinese")
+        elif transcription == "مرحبا":
+            st.write("Arabic")
+        elif transcription == "こんにちは":
+            st.write("Japanese")
+        elif transcription == "привет":
+            st.write("Russian")
+        else:
+            st.write("Unknown language")
 
         if transcription == "Hello.":
             st.image("./img/english.png", caption="English")
