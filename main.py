@@ -5,7 +5,6 @@ import streamlit as st
 
 # import streamlit_shadcn_ui as ui
 from dotenv import load_dotenv
-from huggingface_hub import InferenceClient
 
 load_dotenv()
 token = os.getenv("HUGGINGFACE_TOKEN")
