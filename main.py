@@ -14,13 +14,13 @@ headers = {
     "Content-Type": "audio/flac",
 }
 
-
 st.title("Proficiency Voice Recognition")
 
 # receive voice
 audio_value = st.audio_input("Record a voice message")
 
-transcription = ""
+# transcription = ""
+# result = " "
 
 # Save the audio bytes to a temporary file
 if audio_value:
@@ -45,15 +45,50 @@ if audio_value:
         # print(f"Detected language: {language}")
         # print(f"Transcription: {transcription}")
 
+        st.write("Transcription:")
+        st.write(transcription)
+        # st.write(result)
+
+        language_map = {
+            "สวัสดี": "Thai",
+            "Hello.": "English",
+            "Hola.": "Spanish",
+            "Bonjour.": "French",
+            "你好": "Chinese",
+            "مرحبا": "Arabic",
+            "こんにちは": "Japanese",
+            "привет": "Russian",
+        }
+
+        print(language_map.get(transcription, "Unknown language"))
+        st.write("Language:")
+        st.write(language_map.get(transcription, "Unknown language"))
+
+        if transcription == "Hello.":
+            st.image("./img/english.png", caption="English")
+        elif transcription == "Hola.":
+            st.image("./img/spanish.png", caption="Spanish")
+        elif transcription == "Bonjour":
+            st.image("./img/french.png", caption="French")
+        elif transcription == "你好":
+            st.image("./img/chinese.png", caption="Chinese")
+        elif transcription == "مرحبا":
+            st.image("./img/arabic.png", caption="Arabic")
+        elif transcription == "こんにちは":
+            st.image("./img/japanese.png", caption="Japanese")
+        elif transcription == "привет":
+            st.image("./img/russia.png", caption="Russia")
+        elif transcription == "สวัสดี":
+            st.image("./img/thai.png", caption="Thai")
+        else:
+            print("Unknown language")
+
     except requests.exceptions.HTTPError as err:
         print(f"HTTP Error: {err.response.status_code}")
         print(f"Details: {err.response.text}")
     except Exception as e:
         print(f"Error: {str(e)}")
 
-    # ai
 
-st.write("Transcription:")
-st.write(transcription)
 # st.write("language:")
 # st.write(transcription.inferred_languages[0])
