@@ -53,41 +53,30 @@ if audio_value:
 
         if transcription == "สวัสดี":
             st.write("Thai")
+            st.image("./img/thai.png", caption="Thai")
         elif transcription == "Hello.":
             st.write("English")
-        elif transcription == "Hola.":
-            st.write("Spanish")
-        elif transcription == "Bonjour.":
-            st.write("French")
-        elif transcription == "你好":
-            st.write("Chinese")
-        elif transcription == "مرحبا":
-            st.write("Arabic")
-        elif transcription == "こんにちは":
-            st.write("Japanese")
-        elif transcription == "привет":
-            st.write("Russian")
-        else:
-            st.write("Unknown language")
-
-        if transcription == "Hello.":
             st.image("./img/english.png", caption="English")
         elif transcription == "Hola.":
+            st.write("Spanish")
             st.image("./img/spanish.png", caption="Spanish")
-        elif transcription == "Bonjour":
+        elif transcription == "Bonjour.":
+            st.write("French")
             st.image("./img/french.png", caption="French")
         elif transcription == "你好":
+            st.write("Chinese")
             st.image("./img/chinese.png", caption="Chinese")
         elif transcription == "مرحبا":
+            st.write("Arabic")
             st.image("./img/arabic.png", caption="Arabic")
         elif transcription == "こんにちは":
+            st.write("Japanese")
             st.image("./img/japanese.png", caption="Japanese")
         elif transcription == "привет":
+            st.write("Russian")
             st.image("./img/russia.png", caption="Russia")
-        elif transcription == "สวัสดี":
-            st.image("./img/thai.png", caption="Thai")
         else:
-            print("Unknown language")
+            st.write("Unknown language")
 
     except requests.exceptions.HTTPError as err:
         print(f"HTTP Error: {err.response.status_code}")
