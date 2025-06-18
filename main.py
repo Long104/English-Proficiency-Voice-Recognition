@@ -50,7 +50,33 @@ if audio_value:
         # st.write(result)
 
         st.write("Language:")
-        st.write("Thai")
+        match transcription:
+            case "สวัสดี":
+                st.write("Thai")
+                st.image("./img/thai.png", caption="Thai")
+            case "Hello.":
+                st.write("English")
+                st.image("./img/english.png", caption="English")
+            case "Hola.":
+                st.write("Spanish")
+                st.image("./img/spanish.png", caption="Spanish")
+            case "Bonjour.":
+                st.write("French")
+                st.image("./img/french.png", caption="French")
+            case "你好":
+                st.write("Chinese")
+                st.image("./img/chinese.png", caption="Chinese")
+            case "مرحبا":
+                st.write("Arabic")
+                st.image("./img/arabic.png", caption="Arabic")
+            case "こんにちは":
+                st.write("Japanese")
+                st.image("./img/japanese.png", caption="Japanese")
+            case "привет":
+                st.write("Russian")
+                st.image("./img/russia.png", caption="Russia")
+            case _:
+                st.write("Unknown language")
 
         # if transcription == "สวัสดี":
         #     st.write("Thai")
