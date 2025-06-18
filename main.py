@@ -11,10 +11,10 @@ token = os.getenv("HUGGINGFACE_TOKEN")
 API_URL = "https://api-inference.huggingface.co/models/openai/whisper-large-v3"
 headers = {
     "Authorization": f"Bearer {os.getenv('HUGGINGFACE_TOKEN')}",
-    "Content-Type": "audio/flac",
+    "Content-Type": "audio/wav",
 }
 
-st.title("Proficiency Voice Recognition")
+st.title("Voice Recognition and Transcription")
 
 # receive voice
 audio_value = st.audio_input("Record a voice message")
@@ -78,32 +78,6 @@ if audio_value:
             case _:
                 st.write("Unknown language")
 
-        # if transcription == "สวัสดี":
-        #     st.write("Thai")
-        #     st.image("./img/thai.png", caption="Thai")
-        # elif transcription == "Hello.":
-        #     st.write("English")
-        #     st.image("./img/english.png", caption="English")
-        # elif transcription == "Hola.":
-        #     st.write("Spanish")
-        #     st.image("./img/spanish.png", caption="Spanish")
-        # elif transcription == "Bonjour.":
-        #     st.write("French")
-        #     st.image("./img/french.png", caption="French")
-        # elif transcription == "你好":
-        #     st.write("Chinese")
-        #     st.image("./img/chinese.png", caption="Chinese")
-        # elif transcription == "مرحبا":
-        #     st.write("Arabic")
-        #     st.image("./img/arabic.png", caption="Arabic")
-        # elif transcription == "こんにちは":
-        #     st.write("Japanese")
-        #     st.image("./img/japanese.png", caption="Japanese")
-        # elif transcription == "привет":
-        #     st.write("Russian")
-        #     st.image("./img/russia.png", caption="Russia")
-        # else:
-        #     st.write("Unknown language")
 
     except requests.exceptions.HTTPError as err:
         print(f"HTTP Error: {err.response.status_code}")
